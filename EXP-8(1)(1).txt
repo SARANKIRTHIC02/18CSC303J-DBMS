@@ -1,0 +1,132 @@
+SQL> SELECT Name FROM Student WHERE AGE > (
+  2  SELECT AGE FROM Student WHERE RollNo = 1);
+
+NAME                                                                            
+------------------------------                                                  
+Pratyush                                                                        
+Subhrojyoti                                                                     
+Sruthisagar                                                                     
+Sayantan                                                                        
+
+SQL> SELECT Name, Age FROM Student
+  2  GROUP BY Age
+  3  HAVING MIN(AGE) > (
+  4  SELECT AGE FROM EMPLOYEE WHERE RollNo = 1);
+SELECT AGE FROM EMPLOYEE WHERE RollNo = 1)
+                *
+ERROR at line 4:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT Name, Age FROM Student
+  2  GROUP BY Age
+  3  HAVING MIN(AGE) > (
+  4  SELECT AGE FROM Student WHERE RollNo = 1);
+SELECT Name, Age FROM Student
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT Max(RollNo), Age FROM Student
+  2  GROUP BY Age
+  3  HAVING MIN(AGE) > (
+  4  SELECT AGE FROM Student WHERE RollNo = 1);
+
+MAX(ROLLNO)        AGE                                                          
+----------- ----------                                                          
+          5         21                                                          
+          4         20                                                          
+
+SQL> SELECT NAME, AGE FROM Student
+  2  WHERE AGE < ANY (
+  3  SELECT AGE WHERE NAME = 'Sayantan')
+  4  AND NAME <> 'Sayantan';
+SELECT AGE WHERE NAME = 'Sayantan')
+           *
+ERROR at line 3:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT NAME, AGE FROM Student
+  2  WHERE AGE < ANY (
+  3  SELECT AGE WHERE NAME = 'Sayantan')
+  4  AND NAME <> 'Sayantan';
+SELECT AGE WHERE NAME = 'Sayantan')
+           *
+ERROR at line 3:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT NAME, AGE FROM Student
+  2  WHERE AGE < ANY (
+  3  SELECT AGE FROM Student WHERE NAME = 'Sayantan')
+  4  AND NAME <> 'Sayantan';
+
+NAME                                  AGE                                       
+------------------------------ ----------                                       
+Pranav                                 19                                       
+Subhrojyoti                            20                                       
+Sruthisagar                            20                                       
+Pratyush                               20                                       
+
+SQL> SELECT NAME, AGE FROM Student
+  2  WHERE AGE > (
+  3  SELECT AVG(AGE) FROM Student);
+
+NAME                                  AGE                                       
+------------------------------ ----------                                       
+Sayantan                               21                                       
+
+SQL> SELECT NAME, AGE FROM Student
+  2  WHERE AGE < (
+  3  SELECT AVG(AGE) FROM Student);
+
+NAME                                  AGE                                       
+------------------------------ ----------                                       
+Pranav                                 19                                       
+
+SQL> SELECT RollNo, Name, Address FROM Student
+  2  WHERE Name IN (
+  3  SELECT Name FROM Student
+  4  WHERE AGE = 20);
+
+    ROLLNO NAME                           ADDRESS                               
+---------- ------------------------------ ------------------------------        
+         2 Pratyush                       Navi Mumbai                           
+         3 Subhrojyoti                    Burdwan                               
+         4 Sruthisagar                    Vizayawada                            
+
+SQL> DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                    NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(30)
+ ADDRESS                                            VARCHAR2(30)
+ PHONE                                              VARCHAR2(10)
+ AGE                                                NUMBER(3)
+
+SQL> SELECT RollNo, Name FROM Student
+  2  WHERE RollNo IN (
+  3  SELECT RollNo FROM Student
+  4  WHERE AGE <= AVG(AGE));
+WHERE AGE <= AVG(AGE))
+             *
+ERROR at line 4:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT RollNo, Name FROM Student
+  2  WHERE RollNo IN (
+  3  SELECT RollNo FROM Student
+  4  WHERE AGE <= (
+  5  SELECT AVG(Age) FROM Student));
+
+    ROLLNO NAME                                                                 
+---------- ------------------------------                                       
+         1 Pranav                                                               
+         2 Pratyush                                                             
+         3 Subhrojyoti                                                          
+         4 Sruthisagar                                                          
+
+SQL> Spool off

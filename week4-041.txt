@@ -1,0 +1,107 @@
+DBMS EXPT - 4
+S.SARAN KIRTHIC
+RA1911032010041
+
+
+SQL> create table guests
+  2  (
+  3  firstname varchar(25),
+  4  lastname varchar(25),
+  5  dob date,
+  6  city varchar(25),
+  7  guestid number,
+  8  membertype varchar(25)
+  9  );
+
+Table created.
+
+SQL> insert into guests values('Sam','losco',To_DATE('25-02-1988','DD-MM-YYYY'),'chennai','786','silver');
+
+1 row created.
+
+SQL> insert into guests values('ricky','lafluer',To_DATE('21-12-1985','DD-MM-YYYY'),'mumbai','573','gold');
+
+1 row created.
+
+SQL> insert into guests values('jim','lahey',To_DATE('16-7-1976','DD-MM-YYYY'),'delhi','573','platinum');
+
+1 row created.
+
+SQL> insert into guests values('ray','lafluer',To_DATE('2-6-1982','DD-MM-YYYY'),'chennai','324','siver');
+
+1 row created.
+
+SQL> select concat(firstname,lastname) as guestname from guests;
+
+GUESTNAME                                                                       
+--------------------------------------------------                              
+Samlosco                                                                        
+rickylafluer                                                                    
+jimlahey                                                                        
+raylafluer                                                                      
+
+SQL> select initcap('test initcap') "initcap" from dual;
+
+initcap                                                                         
+------------                                                                    
+Test Initcap                                                                    
+
+SQL> select instr('Testing testing testing','est'1,1) "instring" from dual;
+select instr('Testing testing testing','est'1,1) "instring" from dual
+                                            *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select instr('Testing testing testing','est',1,1) "instring" from dual;
+
+  instring                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> select instr('Testing testing testing','est',-3,2) "instring from dual;
+ERROR:
+ORA-01740: missing double quote in identifier 
+
+
+SQL> select instr('Testing testing testing','est',-3,2) 'instring' from dual;
+select instr('Testing testing testing','est',-3,2) 'instring' from dual
+                                                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select instr('Testing testing testing','est',-3,2) "instring" from dual;
+
+  instring                                                                      
+----------                                                                      
+        10                                                                      
+
+SQL> select lower(lastname) as lastnamelower from guests;
+
+LASTNAMELOWER                                                                   
+-------------------------                                                       
+losco                                                                           
+lafluer                                                                         
+lahey                                                                           
+lafluer                                                                         
+
+SQL> select lower(city) as citylower from guests;
+
+CITYLOWER                                                                       
+-------------------------                                                       
+chennai                                                                         
+mumbai                                                                          
+delhi                                                                           
+chennai                                                                         
+
+SQL> select upper(city) as cityupper from guests;
+
+CITYUPPER                                                                       
+-------------------------                                                       
+CHENNAI                                                                         
+MUMBAI                                                                          
+DELHI                                                                           
+CHENNAI                                                                         
+
+SQL> spool off

@@ -1,0 +1,117 @@
+DBMS EXPT - 5
+S.SARAN KIRTHIC
+RA1911032010041
+
+
+SQL> create table bookings
+  2  (
+  3  sno varchar(25),
+  4  name varchar(25),
+  5  days number(10),
+  6  nights number(10),
+  7  primary keey(sno));
+primary keey(sno))
+            *
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table bookings(sno varchar(20), name varchar(20), days number(10), nights number(10), primary key(sno));
+
+Table created.
+
+SQL> insert into bookings values('11','randy',4,3);
+
+1 row created.
+
+SQL> insert into bookings values('12','jim',2,2);
+
+1 row created.
+
+SQL> insert into bookings values('13','sam',3,3);
+
+1 row created.
+
+SQL> select * from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS                 
+-------------------- -------------------- ---------- ----------                 
+11                   randy                         4          3                 
+12                   jim                           2          2                 
+13                   sam                           3          3                 
+
+SQL> create table bill(sno varchar(20),bill varchar(10),foreign key(sno) references bookings(sno));
+
+Table created.
+
+SQL> desc bill;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                VARCHAR2(20)
+ BILL                                               VARCHAR2(10)
+
+SQL> insert into bookings values('&sno','&name','&days','&nights');
+Enter value for sno: 13
+Enter value for name: ricky
+Enter value for days: 3
+Enter value for nights: 4
+old   1: insert into bookings values('&sno','&name','&days','&nights')
+new   1: insert into bookings values('13','ricky','3','4')
+insert into bookings values('13','ricky','3','4')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (RA1911032010041.SYS_C006236) violated 
+
+
+SQL> select * from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS                 
+-------------------- -------------------- ---------- ----------                 
+11                   randy                         4          3                 
+12                   jim                           2          2                 
+13                   sam                           3          3                 
+
+SQL> insert into bookings values('&sno','&name','&days','&nights');
+Enter value for sno: 14
+Enter value for name: john
+Enter value for days: 6
+Enter value for nights: 7
+old   1: insert into bookings values('&sno','&name','&days','&nights')
+new   1: insert into bookings values('14','john','6','7')
+
+1 row created.
+
+SQL> select * from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS                 
+-------------------- -------------------- ---------- ----------                 
+11                   randy                         4          3                 
+12                   jim                           2          2                 
+13                   sam                           3          3                 
+14                   john                          6          7                 
+
+SQL> create table executive(exno varchar(20), name varchar(25) default 'mahesh',bill int check(bill>5000));
+
+Table created.
+
+SQL> insert into executive values('100','ganesh',5600);
+
+1 row created.
+
+SQL> select * from executive;
+
+EXNO                 NAME                            BILL                       
+-------------------- ------------------------- ----------                       
+100                  ganesh                          5600                       
+
+SQL> alter table executive add check (bill>5000);
+
+Table altered.
+
+SQL> select * from executive;
+
+EXNO                 NAME                            BILL                       
+-------------------- ------------------------- ----------                       
+100                  ganesh                          5600                       
+
+SQL> spool off

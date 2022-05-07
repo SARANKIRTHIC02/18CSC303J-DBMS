@@ -1,0 +1,74 @@
+RA1911032010041
+S saran kirthic
+
+EXP 1
+
+
+SQL> CREATE TABLE emp (empno NUMBER,empname VARCHAR2(255),DOB DATE,salary NUMBER,designation VARCHAR2(20));
+
+Table created.
+
+
+SQL> INSERT INTO emp VALUES(100,'John',TO_DATE('04.10.1994','DD-MM-YYYY'),50000,'Manager');
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES(100,'Greg',TO_DATE('06.06.1994','DD-MM-YYYY'),25000,'Clerk');
+
+1 row created.
+
+SQL> SELECT * FROM emp
+  2  
+SQL> SELECT * FROM emp;
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+       100                                                                      
+John                                                                            
+04-OCT-94      50000 Manager                                                    
+                                                                                
+       100                                                                      
+Greg                                                                            
+06-JUN-94      25000 Clerk                                                      
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+                                                                                
+
+SQL> SELECT empname,salary FROM emp;
+
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+John                                                                            
+     50000                                                                      
+                                                                                
+Greg                                                                            
+     25000                                                                      
+                                                                                
+
+SQL> UPDATE emp SET salary = salary + 1000;;
+UPDATE emp SET salary = salary + 1000;
+                                     *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> UPDATE emp SET salary = salary + 1000;
+
+2 rows updated.
+
+SQL> DELETE FROM emp WHERE empno = 100;
+
+2 rows deleted.
+
+SQL> spool off

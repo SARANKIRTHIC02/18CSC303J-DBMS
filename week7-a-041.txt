@@ -1,0 +1,135 @@
+S.Saran Kirthic
+RA1911032010041
+
+
+SQL> create table depositor(cus_name varchar(50), acno number);
+create table depositor(cus_name varchar(50), acno number)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> drop depositor;
+drop depositor
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop table depositor;
+
+Table dropped.
+
+SQL> drop table borrower;
+
+Table dropped.
+
+SQL> create table depositor(cus_name varchar(50), acno number);
+
+Table created.
+
+SQL> create table borrower(cus_name varchar(50), loanno number);
+
+Table created.
+
+SQL> insert into depositor('ricky', 50000);
+insert into depositor('ricky', 50000)
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into depositor values('ricky', 50000);
+
+1 row created.
+
+SQL> insert into depositor values('julian', 25000);
+
+1 row created.
+
+SQL> insert into depositor values('jim', 15000);
+
+1 row created.
+
+SQL> insert into depositor values('randy', 5000);
+
+1 row created.
+
+SQL> insert into depositor values('ted', 35000);
+
+1 row created.
+
+SQL> insert into borrower values('ted', 15000);
+
+1 row created.
+
+SQL> insert into borrower values('john', 20000);
+
+1 row created.
+
+SQL> insert into borrower values('ricky', 10000);
+
+1 row created.
+
+SQL> insert into borrower values('julian', 40000);
+
+1 row created.
+
+SQL> insert into borrower values('sam', 60000);
+
+1 row created.
+
+SQL> (select cus_name from depositor) union (select sus_name from borrower);
+(select cus_name from depositor) union (select sus_name from borrower)
+                                               *
+ERROR at line 1:
+ORA-00904: "SUS_NAME": invalid identifier 
+
+
+SQL> (select cus_name from depositor) union (select cus_name from borrower);
+
+CUS_NAME                                                                        
+--------------------------------------------------                              
+jim                                                                             
+john                                                                            
+julian                                                                          
+randy                                                                           
+ricky                                                                           
+sam                                                                             
+ted                                                                             
+
+7 rows selected.
+
+SQL> (select cus_name from depositor) union all (select cus_name from borrower);
+
+CUS_NAME                                                                        
+--------------------------------------------------                              
+ricky                                                                           
+julian                                                                          
+jim                                                                             
+randy                                                                           
+ted                                                                             
+ted                                                                             
+john                                                                            
+ricky                                                                           
+julian                                                                          
+sam                                                                             
+
+10 rows selected.
+
+SQL> (select cus_name from depositor) intersect (select cus_name from borrower);
+
+CUS_NAME                                                                        
+--------------------------------------------------                              
+julian                                                                          
+ricky                                                                           
+ted                                                                             
+
+SQL> (select cus_name from borrower) minus (select cus_name from depositor);
+
+CUS_NAME                                                                        
+--------------------------------------------------                              
+john                                                                            
+sam                                                                             
+
+SQL> spool off

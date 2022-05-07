@@ -1,0 +1,170 @@
+S.Saran kirthic
+RA1911032010041
+
+
+SQL*Plus: Release 11.2.0.4.0 Production on Mon Mar 28 14:39:32 2022
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: RA1911032010041/RA1911032010041@52.45.190.47:1521/ORCL
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL> create table emp(empno int, ename varchar(50),salary int);
+
+Table created.
+
+SQL> create table dept(empno int, deptno int);
+
+Table created.
+
+SQL> insert into dept values(1,10);
+
+1 row created.
+
+SQL> insert into dept values(2,11);
+
+1 row created.
+
+SQL> insert into dept values(3,12);
+
+1 row created.
+
+SQL> insert into dept values(4,13);
+
+1 row created.
+
+SQL> insert into dept values(5,14);
+
+1 row created.
+
+SQL> insert into dept values(1,'ricky',50000);
+insert into dept values(1,'ricky',50000)
+            *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> insert into emp values(1,'ricky',50000);
+
+1 row created.
+
+SQL> insert into emp values(1,'julian',40000);
+
+1 row created.
+
+SQL> insert into emp values(3,'bubbles',30000);
+
+1 row created.
+
+SQL> insert into emp values(4,'jim',20000);
+
+1 row created.
+
+SQL> insert into emp values(5,'randy',10000);
+
+1 row created.
+
+SQL> update emp
+  2  set empno = '2'
+  3  where ename='juilan';
+
+0 rows updated.
+
+SQL> select *
+  2  from emp
+  3  inner join dept
+  4  on emp.empno =dept.empno;
+
+     EMPNO ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+     EMPNO     DEPTNO
+---------- ----------
+         1 ricky                                                   50000
+         1         10
+
+         1 julian                                                  40000
+         1         10
+
+         3 bubbles                                                 30000
+         3         12
+
+
+     EMPNO ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+     EMPNO     DEPTNO
+---------- ----------
+         4 jim                                                     20000
+         4         13
+
+         5 randy                                                   10000
+         5         14
+
+
+SQL> select *
+  2  from emp
+  3  left join dept
+  4  on emp.empno = dept.empno;
+
+     EMPNO ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+     EMPNO     DEPTNO
+---------- ----------
+         1 ricky                                                   50000
+         1         10
+
+         1 julian                                                  40000
+         1         10
+
+         3 bubbles                                                 30000
+         3         12
+
+
+     EMPNO ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+     EMPNO     DEPTNO
+---------- ----------
+         4 jim                                                     20000
+         4         13
+
+         5 randy                                                   10000
+         5         14
+
+
+SQL> select 8
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL>
+SQL> selct *
+SP2-0042: unknown command "selct *" - rest of line ignored.
+SQL>
+SQL> select *
+  2  from emp
+  3  cross join dept
+  4  on emp.empno = dept.empno;
+on emp.empno = dept.empno
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select 8 from emp,dept where emp.empno = dept.empno;
+
+         8
+----------
+         8
+         8
+         8
+         8
+         8
+
+SQL> spool off
+not spooling currently
+SQL>
+

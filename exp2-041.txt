@@ -1,0 +1,87 @@
+SQL> create table receptionist ( recep_id number, recep_name varchar(255),recep_phone number,address varchar(255));
+create table receptionist ( recep_id number, recep_name varchar(255),recep_phone number,address varchar(255))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table receptionist ( recep_id number, recep_name varchar(255),recep_phone number,address varchar(255));
+create table receptionist ( recep_id number, recep_name varchar(255),recep_phone number,address varchar(255))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> select * from receptionist
+  2  
+SQL> 
+SQL> select * from receptionist;
+
+no rows selected
+
+SQL> create table receptionist (recep_id number, recep_name varchar(255),recep_phone number,address varchar(255));
+create table receptionist (recep_id number, recep_name varchar(255),recep_phone number,address varchar(255))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> insert values into receptionist(11,'abc',9999999999,'chennai');
+insert values into receptionist(11,'abc',9999999999,'chennai')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword 
+
+
+SQL> insert into receptionist values (11,'abc',9999999999,'chennai');
+
+1 row created.
+
+SQL> select * from receptionist
+  2  
+SQL> select * from receptionist;
+
+  RECEP_ID                                                                      
+----------                                                                      
+RECEP_NAME                                                                      
+--------------------------------------------------------------------------------
+RECEP_PHONE                                                                     
+-----------                                                                     
+ADDRESS                                                                         
+--------------------------------------------------------------------------------
+        11                                                                      
+abc                                                                             
+ 9999999999                                                                     
+chennai                                                                         
+                                                                                
+
+SQL> select * from receptionist where address = 'chennai';
+
+  RECEP_ID                                                                      
+----------                                                                      
+RECEP_NAME                                                                      
+--------------------------------------------------------------------------------
+RECEP_PHONE                                                                     
+-----------                                                                     
+ADDRESS                                                                         
+--------------------------------------------------------------------------------
+        11                                                                      
+abc                                                                             
+ 9999999999                                                                     
+chennai                                                                         
+                                                                                
+
+SQL> insert into receptionist values (1109,'xyz',9999966699,'bangalore');
+
+1 row created.
+
+SQL> insert into receptionist values (1909,'pqr',9999966229,'mumbai');');
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into receptionist values (1909,'pqr',9999966229,'mumbai');
+
+1 row created.
+
+SQL> spool off
